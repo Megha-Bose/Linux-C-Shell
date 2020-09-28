@@ -51,12 +51,17 @@ job bg_jobs[MX_L2];
 job f_current;
 
 int hist_itr, hist_cnt;
+int check_redirect;
 char hists[20][2*MX_L2];
 
 void prompt();
 void pwd();
 char* get_pseudo_path();
 char* get_abs_path(char *path);
+
+int check_redirection(char *command);
+void redirection(char *com);
+
 void cd(char* path);
 void echo(char* token);
 char* r_line(char *filename, int n);
@@ -70,9 +75,6 @@ void overkill();
 void fore(char **token);
 void bg_handler(int sig);
 void back(char **token);
-
-int isfile(char* path);
-void redirection(char *command);
 
 void set_env(char *token, int cnt);
 void unset_env(char *token, int cnt);

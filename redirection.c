@@ -1,146 +1,123 @@
 #include "headers.h"
 
-int isfile(char* path) 
-{
-    struct stat f;
-    if(stat(path, &f) == 0 && !S_ISDIR(f.st_mode))
-        return 1;
-    else return 0;
-}
-
 void redirection(char *command)
 {
-    int saved_stdout = dup(STDOUT_FILENO);
-    int saved_stdin = dup(STDIN_FILENO);
-    int status;
-
-    char *output[2], *input[2];
-    char * out_file = NULL;
-    char * in_file = NULL;
-
+    int d_stdout = dup(STDOUT_FILENO);
+    int d_stdin = dup(STDIN_FILENO);
+    int inpf = 0, outf = 0, status;
     char * inp = strstr(command, "<");
-    int in = !(inp == NULL);
-    int out_type = 0;
     char * out = strstr(command, ">>");
+    char *out_file, *inp_file;
+    char *outcom[2], *incom[2];
+    char* com_l = (char *) malloc(sizeof(char) * MX_L1);
     
+    if(inp != NULL)
+        inpf = 1;
     if(out != NULL)
-        out_type = 2;
-
-    else 
+        outf = 2;
+    else
     {
-        out = strstr(command, ">");
-        if(out != NULL)
-            out_type = 1;
+        char *out2 = strstr(command, ">");
+        if(out2 != NULL)
+            outf = 1;
     }
-
-    output[0] = &command[0];
-
-    if(out_type)
+    char *p;
+    outcom[0] = command;
+    if(outf)
     { 
-        output[0] = strtok(command, ">");
-        output[1] = strtok(NULL, ">");
-        out_file = strtok(output[1], " \r\t\n");
-    }
-
-    input[0] = output[0];
-    if(in)
-    { 
-        input[0] = strtok(input[0], "<");
-        input[1] = strtok(NULL, "<");
-    }
-
-    char **args = (char**)malloc(sizeof(char*) * 300);
-    int no_args = 0;
-    
-    if(in)
-    {
-        if(input[1] == NULL)
-        {
-            printf("Specify file name for input\n");
-            return;
-        }
-        in_file = strtok(input[1], " \n\r\t");
-        if(!isfile(in_file))
-        {
-            printf("File does not exist\n");
-            return;
-        }
-    }
-    input[0] = strtok(input[0], " \n\r\t");
-    while (input[0] != NULL)
-    {
-        args[no_args]  = (char *)malloc(sizeof(char) *strlen(input[0])+10);
-        strcpy(args[no_args], input[0]);
-        input[0] = strtok(NULL, " \n\t\r");
-        no_args++;
-    }
-    args[no_args] = NULL;
-    if(out_type)
-    {
+        outcom[0] = strtok(command, ">");
+        strcpy(com_l,outcom[0]);
+        outcom[1] = strtok(NULL, ">");
+        out_file = strtok(outcom[1], " \r\t\n");
         if(out_file == NULL)
         {
-            printf("Enter output file\n");
+            printf("No output file entered.\n");
             return;
         }
     }
+    p = outcom[0];
+    if(inpf)
+    { 
+        int flag = 0;
+        incom[0] = strtok(p, "<");
+        strcpy(com_l, incom[0]);
+        incom[1] = strtok(NULL, "<");
+        if(incom[1] == NULL)
+        {
+            printf("No input file entered.\n");
+            return;
+        }
+        inp_file = strtok(incom[1], " \n\r\t");
+        struct stat f;
+        if(stat(inp_file, &f) == 0 && !S_ISDIR(f.st_mode))
+            flag = 1;
+        if(!flag)
+        {
+            printf("File does not exist.\n");
+            return;
+        }
+    }
+
+    char *token = strtok(com_l, " \n\r\t");
+    char **args = (char**)malloc(sizeof(char*) * 100);
+    int arg_num = 0;
+    while(token != NULL)
+    {
+        args[arg_num] = (char *)malloc(sizeof(char) * (strlen(com_l)+5));
+        strcpy(args[arg_num], token);
+        arg_num++;
+        token = strtok(NULL, " \n\t\r");
+    }
+    args[arg_num] = NULL;
 
     pid_t pid = fork();
     if(pid < 0)
     {
-        perror("Error in forking");
+        perror("fork error");
         return;
     }
-
     if(pid == 0)
     {
-        if(in)
+        if(inpf)
         {
-            int fd_in = open(in_file, O_RDONLY);
-            if(fd_in < 0) 
+            int fd = open(inp_file, O_RDONLY);
+            if(fd < 0) 
             {
-                perror("Input redirection");
+                perror("Input redirection error");
                 return;
             }   
-            
-            dup2(fd_in, 0);
-            close(fd_in);
+            dup2(fd, 0);
+            close(fd);
         }
-
-        if(out_type)
+        if(outf)
         {
-            int fd_out;
-            if(out_type == 1)
-                fd_out = open(out_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-
-            else if(out_type == 2)
-                fd_out = open(out_file, O_WRONLY | O_CREAT | O_APPEND, 0644);
-
-            if(fd_out < 0)
+            int fd;
+            if(outf == 1)
+                fd = open(out_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+            else if(outf == 2)
+                fd = open(out_file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+            if(fd < 0)
             {
-                perror("Output Redirection");
+                perror("Output redirection error");
                 return;
             }
-            
-            dup2(fd_out, 1);         
-            close(fd_out);
+            dup2(fd, 1);         
+            close(fd);
         }
-        
         if (execvp(args[0], args) < 0) 
-        {     
+        {    
             perror("Command not found");
             exit(EXIT_FAILURE);
         }
         
-        dup2(saved_stdin, 0);
-        close(saved_stdin);
-        
-        dup2(saved_stdout, 1);
-        close(saved_stdout);
+        dup2(d_stdin, 0);
+        close(d_stdin);
+        dup2(d_stdout, 1);
+        close(d_stdout);
     }        
-    
-    else while (wait(&status) != pid);
-
-    for(int j=0; j < no_args; j++)
-        free(args[j]);
+    else 
+        while (wait(&status) != pid);
+    for(int i = 0; i < arg_num; i++)
+        free(args[i]);
     free(args);
 }

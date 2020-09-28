@@ -1,20 +1,20 @@
-emacs &
-jobs
+echo honolulu >> sorted.txt
+cat sorted.txt
+exit
+echo jgukgugu'lpoouly>sorted.txt
+cat sorted.txt
+echo hello>>sorted.txt
+cat sorted.txt
+cat m.txt
+cat sorted.txt>m.txt
+cat m.txt
+cat sorted.txt>>m.txt
+cat m.txt
+history 9
+exit
 clear
 exit
 emacs &
-kjob 1 9
+quit
+history 20
 exit
-emacs &
-kjob 1 9
-exit
-emacs &
-kjob 1 9
-emacs
-clear
-emacs
-jobs
-clear
-ls
-ls ..
-clear

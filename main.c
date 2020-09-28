@@ -30,7 +30,12 @@ int main()
         prompt();                                                           // display prompt
         
         inp_sz = getline(&inp, &buffer_size, stdin);                        // get semi-colon separated commands as input
-        
+        if(inp_sz == EOF)
+        {
+            printf(YELLOW "\n\t   Thank you for using myCShell. See you soon.\n\n" YELLOW_BOLD "\t\t\t  Sayonara!\n\n" DFLT); // exit message
+            overkill();
+            exit(EXIT_SUCCESS);
+        }
         if(inp[0] != '\n')
             history_update(inp);
 
@@ -49,6 +54,7 @@ int main()
             char *s = (char*) malloc(MX_L2 * sizeof(char));
             strcpy(s, commands[i]);
             int n_com = 0;
+            check_redirect = 0;
             char *temp = strtok(s, delim);
             char **tokens = malloc(256 * sizeof(char*));
             tokens[0] = temp;
@@ -58,78 +64,84 @@ int main()
                 temp = strtok(NULL, delim);
                 tokens[n_com] = temp;
             }
-
-            char* com = strtok(commands[i], delim);                         // get the command
-            if (com == NULL)                                                // check which command and execute accordingly
-                continue;
-            else if (strcmp(com, "cd") == 0)
+            check_redirect = check_redirection(commands[i]);
+            if(check_redirect)
             {
-                if(n_com > 2)
-                {
-                    printf("cd: too many arguments\n");
-                    continue;
-                }
-                com = strtok(NULL, delim);
-                cd(com);
-            }
-            else if (strcmp(com, "pwd") == 0)
-                pwd();
-            else if (strcmp(com, "ls") == 0)
-                check_ls(com);
-            else if (strcmp(com, "echo") == 0)
-                echo(com);
-            else if (strcmp(com, "jobs") == 0)
-                print_jobs();
-            else if (strcmp(com, "kjob") == 0)
-                kjob(com, n_com);
-            else if (strcmp(com, "fg") == 0)
-                fg(com);
-            else if (strcmp(com, "bg") == 0)
-                bg(com);
-            else if (strcmp(com, "setenv") == 0)
-                set_env(com, n_com);
-            else if (strcmp(com, "unsetenv") == 0)
-                unset_env(com, n_com);
-            else if (strcmp(com, "history") == 0)
-                history_print(com);
-            else if (strcmp(com, "nightswatch") == 0)
-                nightswatch(com);
-            else if (strcmp(com, "overkill") == 0)
-                overkill();
-            else if (strcmp(com, "exit") == 0)
-            {
-                history_write();
-                printf(YELLOW "\n\t   Thank you for using myCShell. See you soon.\n\n" YELLOW_BOLD "\t\t\t  Sayonara!\n\n" DFLT); // exit message
-                exit(EXIT_SUCCESS);
-            }
-            else if (strcmp(com, "pinfo") == 0)
-            {
-                pid_t p_id;
-                if(n_com > 2)
-	    		{
-                    printf("pinfo error\n");
-                    continue;
-                }
-	    		if(n_com == 1)
-	    		{
-                    p_id = getpid();
-	    			pinfo(p_id);
-	    		}
-	    		else
-	    		{
-                    com = strtok(NULL, delim);
-                    p_id = atoi(com);
-	    			pinfo(p_id);
-	    		}
-            }
-            else if (strcmp(tokens[n_com - 1], "&") == 0)                   // background process
-            {
-                tokens[n_com - 1] = NULL;
-                back(tokens);
+                redirection(commands[i]);
             }
             else
-                fore(tokens);
-
+            {
+                char* com = strtok(commands[i], delim);                         // get the command
+                if (com == NULL)                                                // check which command and execute accordingly
+                    continue;
+                else if (strcmp(com, "cd") == 0)
+                {
+                    if(n_com > 2)
+                    {
+                        printf("cd: too many arguments\n");
+                        continue;
+                    }
+                    com = strtok(NULL, delim);
+                    cd(com);
+                }
+                else if (strcmp(com, "pwd") == 0)
+                    pwd();
+                else if (strcmp(com, "ls") == 0)
+                    check_ls(com);
+                else if (strcmp(com, "echo") == 0)
+                    echo(com);
+                else if (strcmp(com, "jobs") == 0)
+                    print_jobs();
+                else if (strcmp(com, "kjob") == 0)
+                    kjob(com, n_com);
+                else if (strcmp(com, "fg") == 0)
+                    fg(com);
+                else if (strcmp(com, "bg") == 0)
+                    bg(com);
+                else if (strcmp(com, "setenv") == 0)
+                    set_env(com, n_com);
+                else if (strcmp(com, "unsetenv") == 0)
+                    unset_env(com, n_com);
+                else if (strcmp(com, "history") == 0)
+                    history_print(com);
+                else if (strcmp(com, "nightswatch") == 0)
+                    nightswatch(com);
+                else if (strcmp(com, "overkill") == 0)
+                    overkill();
+                else if (strcmp(com, "exit") == 0 || strcmp(com, "quit") == 0)
+                {
+                    history_write();
+                    printf(YELLOW "\n\t   Thank you for using myCShell. See you soon.\n\n" YELLOW_BOLD "\t\t\t  Sayonara!\n\n" DFLT); // exit message
+                    exit(EXIT_SUCCESS);
+                }
+                else if (strcmp(com, "pinfo") == 0)
+                {
+                    pid_t p_id;
+                    if(n_com > 2)
+                    {
+                        printf("pinfo error\n");
+                        continue;
+                    }
+                    if(n_com == 1)
+                    {
+                        p_id = getpid();
+                        pinfo(p_id);
+                    }
+                    else
+                    {
+                        com = strtok(NULL, delim);
+                        p_id = atoi(com);
+                        pinfo(p_id);
+                    }
+                }
+                else if (strcmp(tokens[n_com - 1], "&") == 0)                   // background process
+                {
+                    tokens[n_com - 1] = NULL;
+                    back(tokens);
+                }
+                else
+                    fore(tokens);
+            }
             free(tokens);
             free(s);                                         
         }

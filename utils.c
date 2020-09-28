@@ -37,3 +37,15 @@ char* get_abs_path(char* path)
     else
         return path;
 }
+
+// function to check if redirection present in command
+int check_redirection(char *command)
+{
+    char *out = strstr(command, ">");
+    char *in = strstr(command, "<");
+
+    if((out != NULL) || (in != NULL))
+        return 1;
+    else
+        return 0;
+}
