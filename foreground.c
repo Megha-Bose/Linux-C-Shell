@@ -1,6 +1,4 @@
 #include "headers.h"
-#include "utils.h"
-#include "foreground.h"
 
 // function for complete execution of a foreground process
 void fore(char **token)

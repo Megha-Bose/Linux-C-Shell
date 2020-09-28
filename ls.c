@@ -1,6 +1,4 @@
 #include "headers.h"
-#include "utils.h"
-#include "ls.h"
 
 // function to check if a file is hidden or not
 int is_hidden(char *file) 

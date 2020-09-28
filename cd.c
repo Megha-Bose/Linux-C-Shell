@@ -1,6 +1,4 @@
 #include "headers.h"
-#include "utils.h"
-#include "cd.h"
 
 void cd(char *path) 
 {

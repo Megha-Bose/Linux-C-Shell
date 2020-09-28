@@ -18,7 +18,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-// frquenty used colour codes
+// frequenty used colour codes
 #define GREEN "\033[0;32m"
 #define RED "\033[0;31m"
 #define YELLOW "\033[0;33m"
@@ -38,7 +38,7 @@
 // defning variables
 char HOME[MX_L2], USER[MX_L1], HOST[MX_L1], CWD[MX_L2];
 
-pid_t SHELL_ID, CHILD_ID;
+pid_t SHELL_ID;
 // char CHILD_NAME[1024];
 
 typedef struct job {
@@ -52,5 +52,48 @@ job f_current;
 
 int hist_itr, hist_cnt;
 char hists[20][2*MX_L2];
+
+void prompt();
+void pwd();
+char* get_pseudo_path();
+char* get_abs_path(char *path);
+void cd(char* path);
+void echo(char* token);
+char* r_line(char *filename, int n);
+
+void print_jobs();
+void kjob(char *token, int cnt);
+void fg(char *token);
+void bg(char *token);
+void overkill();
+
+void fore(char **token);
+void bg_handler(int sig);
+void back(char **token);
+
+int isfile(char* path);
+void redirection(char *command);
+
+void set_env(char *token, int cnt);
+void unset_env(char *token, int cnt);
+
+void history_init();
+void history_update(char* cmd);
+void history_print(char* token);
+void history_write();
+
+int is_hidden(char *file);
+void l_list(char *dir, char *file);
+void ls(char* dir, int a_flag, int l_flag);
+void check_ls(char *command);
+
+void night_interrupt();
+void night_newborn();
+void nightswatch(char *token);
+
+void pinfo(pid_t p_id);
+
+void ctrl_c(int sig);
+void ctrl_z(int sig);
 
 #endif

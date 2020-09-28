@@ -1,7 +1,4 @@
 #include "headers.h"
-#include "utils.h"
-#include "nightswatch.h"
-#include "pinfo.h"
 
 // function to print the number of interrupts per CPU per IO device
 void night_interrupt()

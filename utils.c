@@ -1,5 +1,4 @@
 #include "headers.h"
-#include "utils.h"
 
 // function to get path when home directory considered 
 // is the directory where the shell is executed

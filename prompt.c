@@ -1,6 +1,4 @@
 #include "headers.h"
-#include "utils.h"
-#include "prompt.h"
 
 // a shell prompt of the form <username@system_name:curr_dir>
 void prompt() 

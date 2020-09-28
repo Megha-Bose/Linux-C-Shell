@@ -1,0 +1,20 @@
+emacs &
+jobs
+clear
+exit
+emacs &
+kjob 1 9
+exit
+emacs &
+kjob 1 9
+exit
+emacs &
+kjob 1 9
+emacs
+clear
+emacs
+jobs
+clear
+ls
+ls ..
+clear

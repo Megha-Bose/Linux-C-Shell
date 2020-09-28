@@ -27,9 +27,9 @@ the shell displays the absolute path of the current directory from the root.
 ## Source Files Organisation
 
 - Modular
-- The commands are implemented in separate `.c` files and have their corresponding `.h` header files.
+- The commands are implemented in separate `.c` files.
 - The shell is called from the main function in [main.c](main.c).
-- Common header files are included, and global variables are declared in the [headers.h](headers.h) file.
+- Common header files are included, functions and global variables are declared in the [headers.h](headers.h) file.
 
 
 ## Supported commands

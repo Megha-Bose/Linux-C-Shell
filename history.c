@@ -1,6 +1,4 @@
 #include "headers.h"
-#include "utils.h"
-#include "history.h"
 
 // function to initialise history and loading old history as applicable
 void history_init()
@@ -9,7 +7,7 @@ void history_init()
     char *filename = (char*)malloc(MX_L2 * sizeof(char));
     strcpy(filename, HOME);
     strcat(filename, "/hist.txt");
-    FILE *fd = fopen(filename, "a+");
+    FILE *fd = fopen(filename, "r");
     while (fgets(hists[hist_itr], 2*MX_L2, fd))
     {
         int n = strlen(hists[hist_itr]);
@@ -19,8 +17,8 @@ void history_init()
         if (hist_itr > 19)
             break;
     }
-    hist_itr %= 20;
     hist_cnt = hist_itr;
+    hist_itr %= 20;
     fclose(fd);
 }
 
@@ -67,7 +65,7 @@ void history_write()
     char *filename = (char*)malloc(MX_L2 * sizeof(char));
     strcpy(filename, HOME);
     strcat(filename, "/hist.txt");
-    FILE *fd = fopen(filename, "wd");
+    FILE *fd = fopen(filename, "w");
     for (int i = hist_cnt; i > 0; i--)
     {
         int ind = hist_itr - i + 20;

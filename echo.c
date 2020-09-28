@@ -1,6 +1,4 @@
 #include "headers.h"
-#include "utils.h"
-#include "echo.h"
 
 void echo(char *token) {
     char delim[] = " \n\t\r";

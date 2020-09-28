@@ -1,6 +1,4 @@
 #include "headers.h"
-#include "utils.h"
-#include "pinfo.h"
 
 // function to read the nth line from a file
 char* r_line(char *filename, int n)

@@ -1,7 +1,4 @@
 #include "headers.h"
-#include "utils.h"
-#include "background.h"
-#include "prompt.h"
 
 // function to handle exit of background processes
 void bg_handler(int sig)										

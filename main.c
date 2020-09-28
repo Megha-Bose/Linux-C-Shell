@@ -1,15 +1,4 @@
 #include "headers.h"
-#include "utils.h"
-#include "prompt.h"
-#include "pwd.h"
-#include "cd.h"
-#include "ls.h"
-#include "echo.h"
-#include "pinfo.h"
-#include "foreground.h"
-#include "background.h"
-#include "history.h"
-#include "nightswatch.h"
 
 int main() 
 {
@@ -30,11 +19,14 @@ int main()
     while (true) 
     {
         free(inp);                                                          // free input buffer
-        signal(SIGCHLD, bg_handler);                                        // to handle termination of background child process
+        signal(SIGCHLD, bg_handler);
+        signal(SIGINT, ctrl_c);
+        signal(SIGTSTP, ctrl_z);                                        // to handle termination of background child process
         inp_sz = 0;
         buffer_size = 0;
         num = 0;
 
+        f_current.pid = -1;
         prompt();                                                           // display prompt
         
         inp_sz = getline(&inp, &buffer_size, stdin);                        // get semi-colon separated commands as input
@@ -86,10 +78,24 @@ int main()
                 check_ls(com);
             else if (strcmp(com, "echo") == 0)
                 echo(com);
+            else if (strcmp(com, "jobs") == 0)
+                print_jobs();
+            else if (strcmp(com, "kjob") == 0)
+                kjob(com, n_com);
+            else if (strcmp(com, "fg") == 0)
+                fg(com);
+            else if (strcmp(com, "bg") == 0)
+                bg(com);
+            else if (strcmp(com, "setenv") == 0)
+                set_env(com, n_com);
+            else if (strcmp(com, "unsetenv") == 0)
+                unset_env(com, n_com);
             else if (strcmp(com, "history") == 0)
                 history_print(com);
             else if (strcmp(com, "nightswatch") == 0)
                 nightswatch(com);
+            else if (strcmp(com, "overkill") == 0)
+                overkill();
             else if (strcmp(com, "exit") == 0)
             {
                 history_write();

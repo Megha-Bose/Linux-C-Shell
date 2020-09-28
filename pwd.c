@@ -1,5 +1,4 @@
 #include "headers.h"
-#include "pwd.h"
 
 void pwd() 
 {
