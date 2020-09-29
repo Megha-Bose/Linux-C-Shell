@@ -1,20 +1,20 @@
-echo honolulu >> sorted.txt
-cat sorted.txt
-exit
-echo jgukgugu'lpoouly>sorted.txt
-cat sorted.txt
-echo hello>>sorted.txt
-cat sorted.txt
+diff test1.txt test2.txt > m.txt
 cat m.txt
-cat sorted.txt>m.txt
+more m.txt | wc
+grep "<" m.txt | cat test1.txt | wc
+cat test1.txt
+cat < test2.txt | wc -l > m.txt
 cat m.txt
-cat sorted.txt>>m.txt
+vi test2.txt
+cat < test2.txt | wc -l > m.txt
 cat m.txt
-history 9
-exit
-clear
-exit
-emacs &
-quit
-history 20
-exit
+cat m.txt >> test1.txt
+cat test1.txt
+cat test1.txt > n.txt
+ls
+ls -l
+vi m.txt
+grep a m.txt
+grep b m.txt
+chmod *.c 644
+chmod 644 *.c

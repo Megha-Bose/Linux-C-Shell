@@ -51,7 +51,7 @@ job bg_jobs[MX_L2];
 job f_current;
 
 int hist_itr, hist_cnt;
-int check_redirect;
+int check_redirect, check_pipe;
 char hists[20][2*MX_L2];
 
 void prompt();
@@ -59,8 +59,12 @@ void pwd();
 char* get_pseudo_path();
 char* get_abs_path(char *path);
 
+void execute_com(char *commands);
+
 int check_redirection(char *command);
 void redirection(char *com);
+void piping(char *comm);
+int check_piping(char *command);
 
 void cd(char* path);
 void echo(char* token);

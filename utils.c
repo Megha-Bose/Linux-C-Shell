@@ -49,3 +49,13 @@ int check_redirection(char *command)
     else
         return 0;
 }
+
+// function to check if pipe is present in command
+int check_piping(char *command)
+{
+    char *pip = strstr(command, "|");
+    if(pip != NULL)
+        return 1;
+    else
+        return 0;
+}

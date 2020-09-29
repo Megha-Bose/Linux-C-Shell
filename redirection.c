@@ -69,7 +69,6 @@ void redirection(char *command)
         token = strtok(NULL, " \n\t\r");
     }
     args[arg_num] = NULL;
-
     pid_t pid = fork();
     if(pid < 0)
     {
