@@ -6,7 +6,6 @@ void bg(char *token)
     token = strtok(NULL, delim);
     ll num = atoi(token);
     num--;
-    int f = 0;
     if(num >= 0 && num < num_job)
     {
         kill(bg_jobs[num].pid, SIGTTIN);  

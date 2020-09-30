@@ -1,20 +1,20 @@
+vi
+jobs
+fg 3
+vi 
+emacs &
 jobs
 fg 1
+cler
 clear
-emacs
+vi m
+emacs &
 jobs
 fg 1
-emacs
+gedit &
 jobs
-fg 1
+bg 2
+:::qiOCOCOCqa!
 jobs
-emacs
-jobs
-fg 1
-jobs
-fg 1
-jobs
-vim m.txt
-jobs
-fg 1
+overkill
 jobs

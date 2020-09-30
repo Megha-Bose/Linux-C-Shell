@@ -63,10 +63,40 @@ first word of a simple command, the shell executes the command directly without 
     - Implemented in [echo.c](echo.c)
     - Displays whatever follows `echo`. 
 
-5. `exit`
+5. `exit` and `quit`
 
-    - Exits the shell successfully, and updates [history.txt](history.text).
+    - Exits the shell successfully, and updates [hist.txt](hist.txt).
 
+6.  `setenv var[value]` & `unset var`
+
+    - Creates an environment variable var if it doesn't already exist and assigns it the value given
+    - `unset var` destroys that environment variable
+
+7.  `jobs`
+
+    - Implemented in [jobs.c](jobs.c)
+    - Prints a list of all currently running jobs with their pid in the order of their creation
+    - Gives the state of the job – Running, Sleeping, Stopped or Defunct
+
+8.  `kjob <jobNumber> <signalNumber>`
+
+    - Implemented in [kjob.c](kjob.c)
+    - Takes the job number of a running job and sends the signal corresponding to ​signal number​ to that process.
+
+9. `fg <jobNumber>`
+
+    - Implemented in [fg.c](fg.c)
+    - Brings a running or a stopped background job with given job number to foreground.
+
+10. `bg <jobNumber>`
+
+    - Implemented in [bg.c](bg.c)
+    - Changes a stopped background job to a running background job.
+
+11. `overkill`
+
+    - Implemented in [overkill.c](overkill.c)
+    - Kills all background process at once.
 
 ### Foreground and Background Processes
 
@@ -99,3 +129,18 @@ first word of a simple command, the shell executes the command directly without 
     Here, `n` is taken as an input from the user.
     - Takes input only in the specified format.
     - Terminates when `q` is pressed.
+
+### Additional Features
+
+1. `​CTRL-Z`
+
+    - Changes the status of currently running job to stop, and pushes it to the background.
+    
+2. `CTRL-C`
+
+    - Sends SIGINT signal to the current foreground job​.
+    - If there is no foreground job, then the signal does not have any effect on the shell.
+
+3. Input-Output Redirection & Piping
+
+    - Handles <, >, >>, and | operators appropriately, wherever they are in the command
