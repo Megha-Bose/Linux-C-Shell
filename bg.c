@@ -7,15 +7,11 @@ void bg(char *token)
     ll num = atoi(token);
     num--;
     int f = 0;
-    for(ll i = 0; i < num_job; i++)
+    if(num >= 0 && num < num_job)
     {
-        if(i == num)
-        {
-            f = 1;
-            kill(bg_jobs[num].pid, SIGTTIN);  
-            kill(bg_jobs[num].pid,SIGCONT);
-        }
+        kill(bg_jobs[num].pid, SIGTTIN);  
+        kill(bg_jobs[num].pid,SIGCONT);
     }
-    if(!f)
+    else
         printf("error: No such job found\n");
 }

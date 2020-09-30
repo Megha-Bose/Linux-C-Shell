@@ -100,6 +100,6 @@ void nightswatch(char *token);
 void pinfo(pid_t p_id);
 
 void ctrl_c(int sig);
-void ctrl_z(int sig);
+void stphandler(int sig_num);
 
 #endif

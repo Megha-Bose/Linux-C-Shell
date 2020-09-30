@@ -120,8 +120,9 @@ int main()
     {
         free(inp);                                                          // free input buffer
         signal(SIGCHLD, bg_handler);
+        signal(SIGTSTP, stphandler);
         signal(SIGINT, ctrl_c);
-        signal(SIGTSTP, ctrl_z);                                        // to handle termination of background child process
+
         inp_sz = 0;
         buffer_size = 0;
         num = 0;

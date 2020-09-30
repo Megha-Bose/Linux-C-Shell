@@ -1,20 +1,20 @@
-diff test1.txt test2.txt > m.txt
-cat m.txt
-more m.txt | wc
-grep "<" m.txt | cat test1.txt | wc
-cat test1.txt
-cat < test2.txt | wc -l > m.txt
-cat m.txt
-vi test2.txt
-cat < test2.txt | wc -l > m.txt
-cat m.txt
-cat m.txt >> test1.txt
-cat test1.txt
-cat test1.txt > n.txt
-ls
-ls -l
-vi m.txt
-grep a m.txt
-grep b m.txt
-chmod *.c 644
-chmod 644 *.c
+jobs
+fg 1
+clear
+emacs
+jobs
+fg 1
+emacs
+jobs
+fg 1
+jobs
+emacs
+jobs
+fg 1
+jobs
+fg 1
+jobs
+vim m.txt
+jobs
+fg 1
+jobs
