@@ -54,7 +54,6 @@ void back(char **token)
     }
     else
     {
-		int status;
         bg_jobs[num_job].pid = pid;															// storing name of last background process
         strcpy(bg_jobs[num_job].name, token[0]);											// storing job no. of last background process
 		num_job++;

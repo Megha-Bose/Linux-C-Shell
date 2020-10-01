@@ -69,14 +69,15 @@ first word of a simple command, the shell executes the command directly without 
 
 6.  `setenv var[value]` & `unset var`
 
+    - Implemented in [set_unset_env.c](set_unset_env.c)
     - Creates an environment variable var if it doesn't already exist and assigns it the value given
     - `unset var` destroys that environment variable
 
 7.  `jobs`
 
     - Implemented in [jobs.c](jobs.c)
-    - Prints a list of all currently running jobs with their pid in the order of their creation
-    - Gives the state of the job – Running, Sleeping, Stopped or Defunct
+    - Prints a list of all currently running jobs with their pid in the order of their creation.
+    - Gives the state of the job – Running, Sleeping, Stopped or Defunct.
 
 8.  `kjob <jobNumber> <signalNumber>`
 
@@ -135,7 +136,7 @@ first word of a simple command, the shell executes the command directly without 
 1. `​CTRL-Z`
 
     - Changes the status of currently running job to stop, and pushes it to the background.
-    
+
 2. `CTRL-C`
 
     - Sends SIGINT signal to the current foreground job​.
@@ -143,4 +144,4 @@ first word of a simple command, the shell executes the command directly without 
 
 3. Input-Output Redirection & Piping
 
-    - Handles <, >, >>, and | operators appropriately, wherever they are in the command
+    - Handles `<`, `>`, `>>`, and `|` operators appropriately, wherever they are in the command.

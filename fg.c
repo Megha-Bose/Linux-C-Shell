@@ -11,10 +11,12 @@ void fg(char *token)
 		printf("Invalid job number.");
 		return;
 	}
-
+    
     num--;
     int pid = bg_jobs[num].pid, status;
     
+    signal(SIGTTIN, SIG_IGN);
+    signal(SIGTTOU,SIG_IGN);
     tcsetpgrp(STDIN_FILENO, getpgid(bg_jobs[num].pid));
     signal(SIGTSTP, stphandler);
     kill(pid, SIGCONT);
@@ -35,6 +37,17 @@ void fg(char *token)
             break;
         }
     }
+    waitpid(-1, &status, WUNTRACED);
+    tcsetpgrp(STDIN_FILENO,getpgrp());
+    signal(SIGTTIN,SIG_DFL);
+    signal(SIGTTOU,SIG_DFL);
 
-    waitpid(pid, &status, WUNTRACED);
+    if(WIFSTOPPED(status))
+    {
+        printf("%s with PID %d suspended\n", f_current.name, pid);
+        strcpy(bg_jobs[num_job].name, f_current.name);
+        bg_jobs[num_job].pid = pid;
+        num_job++;
+    }
+    return;
 }

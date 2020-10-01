@@ -8,6 +8,8 @@ void bg(char *token)
     num--;
     if(num >= 0 && num < num_job)
     {
+        if(strcmp(bg_jobs[num].name,"vim") || strcmp(bg_jobs[num].name,"vi"))
+            return;
         kill(bg_jobs[num].pid, SIGTTIN);  
         kill(bg_jobs[num].pid,SIGCONT);
     }

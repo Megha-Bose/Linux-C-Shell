@@ -128,9 +128,8 @@ int main()
         num = 0;
 
         f_current.pid = -1;
-        prompt();                                                           // display prompt
-        
-        inp_sz = getline(&inp, &buffer_size, stdin);                        // get semi-colon separated commands as input
+        prompt();                                                         // display prompt
+        inp_sz = getline(&inp, &buffer_size, stdin);                       // get semi-colon separated commands as input
         if(inp_sz == EOF)
         {
             printf(YELLOW "\n\t   Thank you for using myCShell. See you soon.\n\n" YELLOW_BOLD "\t\t\t  Sayonara!\n\n" DFLT); // exit message
@@ -139,7 +138,6 @@ int main()
         }
         if(inp[0] != '\n')
             history_update(inp);
-
         char *token = strtok (inp, ";");
         char **commands = malloc(256 * sizeof(char*));
         char *delim = " \n\t\r";

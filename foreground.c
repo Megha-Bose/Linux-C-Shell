@@ -18,7 +18,6 @@ void fore(char **token)
             perror("exec error");
 			exit(EXIT_FAILURE);
         }
-		exit(0);
     }
     else
     {
