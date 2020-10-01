@@ -103,6 +103,8 @@ void execute_com(char *commands)
 int main() 
 {
     getcwd(HOME, sizeof(HOME));                                             // get pseudo home directory where we run the shell
+    strcpy(LWD, HOME);
+    strcpy(CWD1, HOME);
     getlogin_r(USER, sizeof(USER));                                         // get user
     gethostname(HOST, sizeof(HOST));                                        // get host
     SHELL_ID = getpid();                                                    // get shell pid

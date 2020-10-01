@@ -36,7 +36,7 @@
 #define ll long long
 
 // defning variables
-char HOME[MX_L2], USER[MX_L1], HOST[MX_L1], CWD[MX_L2];
+char HOME[MX_L2], USER[MX_L1], HOST[MX_L1], CWD[MX_L2], CWD1[MX_L2], LWD[MX_L2];
 
 pid_t SHELL_ID;
 // char CHILD_NAME[1024];

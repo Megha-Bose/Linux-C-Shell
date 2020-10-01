@@ -1,20 +1,20 @@
-jobs
-fg 1
-vim &
-fg 1
-emacs &
-fg 1
-vim &
-fg 1
-vim &
-fg 1
-jobs
-vim &
-fg 1
-jobs
-vim &
-jobs
-fg 1
-jobs
-overkill
-jobs
+cd -
+cd new
+cd neww
+cd -
+cd neww
+cd -
+cd
+cd ..
+cd -
+cd ..
+cd -
+cd
+cd -
+cd new
+cd -
+cd new
+cd neww
+mkdir newww
+cd newww
+cd -
