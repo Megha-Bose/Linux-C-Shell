@@ -49,7 +49,7 @@ void history_print(char *token)
         num = atoi(token);
     if(num > 20)
     {
-        printf("Number of commands needs to be less than or equal to 20.\n");
+        printf(DFLT "Number of commands needs to be less than or equal to 20.\n");
         return;
     }
     for (int i = num; i > 0; i--)

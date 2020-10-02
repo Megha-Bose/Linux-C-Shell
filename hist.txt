@@ -1,20 +1,20 @@
-bg 1
-jobs
-fg 1
-jobs
-emacs
-jobs
-bg 1
-jobs
-fg 1
-jobs
-kjob 1 9
-emacs
-jobs
-bg 1
-jobs
-fg 1
-jobs
-kjob 1 9
-cd new
-cd -
+cd lknwkn;ls
+ls;cd knfow
+history | 1.txt
+clear
+history | 1.txt
+history
+history > 1.txt
+ls > 1.txt
+cat 1.txt
+history | 1.txt
+history | wc
+cat m.txt | wc
+cat m.txt
+olala | ululu
+olala | ulala
+ulala
+clear
+olala | ulala
+ohoho
+clear

@@ -8,7 +8,7 @@ void fg(char *token)
 
     if (num > num_job || num < 1)
 	{
-		printf("Invalid job number.");
+		printf(DFLT "Invalid job number.");
         strcpy(emoji,":'(");
 		return;
 	}

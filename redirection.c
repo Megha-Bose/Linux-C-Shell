@@ -31,7 +31,7 @@ void redirection(char *command)
         out_file = strtok(outcom[1], " \r\t\n");
         if(out_file == NULL)
         {
-            printf("No output file entered.\n");
+            printf(DFLT "No output file entered.\n");
             strcpy(emoji,":'(");
             return;
         }
@@ -45,7 +45,7 @@ void redirection(char *command)
         incom[1] = strtok(NULL, "<");
         if(incom[1] == NULL)
         {
-            printf("No input file entered.\n");
+            printf(DFLT "No input file entered.\n");
             strcpy(emoji,":'(");
             return;
         }
@@ -55,7 +55,7 @@ void redirection(char *command)
             flag = 1;
         if(!flag)
         {
-            printf("File does not exist.\n");
+            printf(DFLT "File does not exist.\n");
             strcpy(emoji,":'(");
             return;
         }
@@ -75,7 +75,7 @@ void redirection(char *command)
     pid_t pid = fork();
     if(pid < 0)
     {
-        perror("fork error");
+        perror(DFLT "fork error");
         strcpy(emoji,":'(");
         return;
     }
@@ -86,7 +86,7 @@ void redirection(char *command)
             int fd = open(inp_file, O_RDONLY);
             if(fd < 0) 
             {
-                perror("Input redirection error");
+                perror(DFLT "Input redirection error");
                 strcpy(emoji,":'(");
                 return;
             }   
@@ -102,7 +102,7 @@ void redirection(char *command)
                 fd = open(out_file, O_WRONLY | O_CREAT | O_APPEND, 0644);
             if(fd < 0)
             {
-                perror("Output redirection error");
+                perror(DFLT "Output redirection error");
                 strcpy(emoji,":'(");
                 return;
             }
@@ -111,7 +111,7 @@ void redirection(char *command)
         }
         if (execvp(args[0], args) < 0) 
         {    
-            perror("Command not found");
+            perror(DFLT "Command not found");
             strcpy(emoji,":'(");
             exit(EXIT_FAILURE);
         }

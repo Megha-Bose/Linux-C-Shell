@@ -10,7 +10,7 @@ void fore(char **token)
 
     if (pid < 0)
     {
-        perror("fork error");
+        perror(DFLT "fork error");
         strcpy(emoji,":'(");
     }
     else if (pid == 0)
@@ -18,9 +18,9 @@ void fore(char **token)
         int check = execvp(token[0], token);	// running the command in a new child process
         if (check < 0)
         {
-            perror("exec error");
             strcpy(emoji,":'(");
-			exit(EXIT_FAILURE);
+            perror(DFLT "exec error");
+			return;
         }
     }
     else

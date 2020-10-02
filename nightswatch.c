@@ -6,7 +6,7 @@ void night_interrupt()
     FILE *fd = fopen("/proc/interrupts", "r");
     if(fd == NULL)
     {
-        perror("interrupts file error");
+        perror(DFLT "interrupts file error");
         strcpy(emoji,":'(");
     }
     else
@@ -29,7 +29,7 @@ void night_interrupt()
                 break;
             }
         }
-        printf("%s\n",l);
+        printf(DFLT "%s\n",l);
         free(l);  
     }
     fclose(fd);
@@ -42,7 +42,7 @@ void night_newborn()
     FILE *fd = fopen("/proc/loadavg", "r");
     if(fd == NULL)
     {
-        perror("loadavg file error");
+        perror(DFLT "loadavg file error");
         strcpy(emoji,":'(");
     }
     else
@@ -55,7 +55,7 @@ void night_newborn()
             baby = token;
             token = strtok(NULL, " ");
         }
-        printf("%s", baby);
+        printf(DFLT "%s", baby);
         free(l);
     }
     fclose(fd);
@@ -69,20 +69,20 @@ void nightswatch(char* token)
     token = strtok(NULL, delim);
     if(token == NULL)
     {
-        printf("Invalid arguments. Please enter in the format `nightswatch -n [seconds] [newborn/interrupt].\n");
+        printf(DFLT "Invalid arguments. Please enter in the format `nightswatch -n [seconds] [newborn/interrupt].\n");
         return;
     }
     token = strtok(NULL, delim);
     if(token == NULL)
     {
-        printf("Invalid arguments. Please enter in the format `nightswatch -n [seconds] [newborn/interrupt].\n");
+        printf(DFLT "Invalid arguments. Please enter in the format `nightswatch -n [seconds] [newborn/interrupt].\n");
         return;
     }
     int n = atoi(token);
     token = strtok(NULL, delim);
     if(token == NULL)
     {
-        printf("Invalid arguments. Please enter in the format `nightswatch -n [seconds] [newborn/interrupt].\n");
+        printf(DFLT "Invalid arguments. Please enter in the format `nightswatch -n [seconds] [newborn/interrupt].\n");
         return;
     }
     if(!strcmp(token, "newborn"))
@@ -91,18 +91,18 @@ void nightswatch(char* token)
         inter = 1;
     else 
     {
-        printf("Invalid arguments. Please enter in the format `nightswatch -n [seconds] [newborn/interrupt]\n");
+        printf(DFLT "Invalid arguments. Please enter in the format `nightswatch -n [seconds] [newborn/interrupt]\n");
         return;
     } 
     if(inter)
     {
         FILE *fd = fopen("/proc/interrupts", "r");
         if(fd == NULL)
-            perror("interrupts file error");
+            perror(DFLT "interrupts file error");
         else
         {
             char *l = r_line("/proc/interrupts", 1);
-            printf("%s\n",l);
+            printf(DFLT "%s\n",l);
             free(l);  
             fclose(fd);
         }
@@ -119,7 +119,7 @@ void nightswatch(char* token)
         int retval; 
         retval = select(1, &rfds, NULL, NULL, &tv);
         if(retval == -1)
-            perror("select error");
+            perror(DFLT "select error");
         else if(retval)
         {
             retval = select(1, &rfds, NULL, NULL, &tv);

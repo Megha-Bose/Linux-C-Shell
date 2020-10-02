@@ -34,7 +34,7 @@ void stphandler(int sig_num)
         strcpy(bg_jobs[num_job].name, f_current.name);
         num_job++;
         strcpy(emoji,":'(");
-        printf("%s with pid %d is suspended.\n", f_current.name, f_current.pid);
+        printf(DFLT "%s with pid %d is suspended.\n", f_current.name, f_current.pid);
         return;
     }
     signal(SIGTSTP, stphandler);

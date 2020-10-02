@@ -6,7 +6,7 @@ void pwd()
     dir = getcwd(NULL, 0);                                  // get cwd
     if (dir == NULL) 
     {
-        perror("current working directory error");
+        perror(DFLT "current working directory error");
         strcpy(emoji,":'(");          // pwd error handling
         return;
     }

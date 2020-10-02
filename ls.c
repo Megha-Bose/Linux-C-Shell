@@ -20,7 +20,7 @@ void l_list(char *dir, char *file)
     struct stat file_stat;
     if(stat(path, &file_stat) < 0)
     {
-        perror("File error");
+        perror(DFLT "File error");
         strcpy(emoji,":'(");
     }
     else 
@@ -48,11 +48,11 @@ void l_list(char *dir, char *file)
         strftime(time, 50, "%b  %d %H:%M", localtime( &file_stat.st_mtime));
 
         if(perm[0] == 'd')
-            printf("%s  %ld  %s\t%s\t%ld\t%s\t" BLUE_BOLD "%s" DFLT "\n", perm, file_stat.st_nlink, pw->pw_name,gr->gr_name, file_stat.st_size, time, file);
+            printf(DFLT "%s  %ld  %s\t%s\t%ld\t%s\t" BLUE_BOLD "%s" DFLT "\n", perm, file_stat.st_nlink, pw->pw_name,gr->gr_name, file_stat.st_size, time, file);
         else if(perm[3] == 'x')
-            printf("%s  %ld  %s\t%s\t%ld\t%s\t" GREEN_BOLD "%s" DFLT "\n", perm, file_stat.st_nlink, pw->pw_name,gr->gr_name, file_stat.st_size, time, file);
+            printf(DFLT "%s  %ld  %s\t%s\t%ld\t%s\t" GREEN_BOLD "%s" DFLT "\n", perm, file_stat.st_nlink, pw->pw_name,gr->gr_name, file_stat.st_size, time, file);
         else 
-            printf("%s  %ld  %s\t%s\t%ld\t%s\t%s\n", perm, file_stat.st_nlink, pw->pw_name,gr->gr_name, file_stat.st_size, time, file);
+            printf(DFLT "%s  %ld  %s\t%s\t%ld\t%s\t%s\n", perm, file_stat.st_nlink, pw->pw_name,gr->gr_name, file_stat.st_size, time, file);
     }
     free(path);
 }
@@ -63,7 +63,7 @@ void ls(char* dir, int a_flag, int l_flag)
     struct dirent **files;
     int num = scandir(dir, &files, NULL, alphasort);
     if(num < 0) {
-        perror("Directory error");
+        perror(DFLT "Directory error");
         strcpy(emoji,":'(");
         return;
     }
@@ -129,7 +129,7 @@ void check_ls(char *token)
         } 
         for(ll i = 0; i < k; i++)
         {
-            if(k > 1) printf("%s:\n",direcs[i]); 
+            if(k > 1) printf(DFLT "%s:\n",direcs[i]); 
             ls(p_direcs[i], a_flag, l_flag);
             if(k > 1) printf("\n");
         }    

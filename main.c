@@ -162,6 +162,7 @@ int main()
         for(int i = 0; i < num; i++)                                        // executing the commands one by one
         {
             emoji_flag = 1;
+            strcpy(emoji,":')");
             execute_com(commands[i]);
         } 
         history_write();                                                    // writing current history back to hist.txt  

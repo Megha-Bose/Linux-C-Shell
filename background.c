@@ -25,10 +25,10 @@ void bg_handler(int sig)
             }
         }
 		if(chk && WIFEXITED(status) && WEXITSTATUS(status) == 0)							// process exited normally
-        	fprintf(stderr, "\n%s with PID %d exited normally\n:')", cmd, pid);
+        	fprintf(stderr, DFLT "\n%s with PID %d exited normally\n:')", cmd, pid);
         else if(chk)
         { 
-			fprintf(stderr, "\n%s with PID %d failed to exit normally\n:'(", cmd, pid);
+			fprintf(stderr, DFLT "\n%s with PID %d failed to exit normally\n:'(", cmd, pid);
         }
         if(chk) 
 			prompt();
@@ -44,7 +44,7 @@ void back(char **token)
 	
     if (pid < 0)
     {
-        perror("fork error");
+        perror(DFLT "fork error");
         strcpy(emoji,":'(");
     }
     else if (pid == 0)
@@ -53,7 +53,7 @@ void back(char **token)
         int check = execvp(token[0], token);												// running the command in a new child process
         if (check < 0)
 		{
-            perror("exec error");
+            perror(DFLT "exec error");
             strcpy(emoji,":'(");
 		}
 		exit(0);
@@ -63,7 +63,7 @@ void back(char **token)
         bg_jobs[num_job].pid = pid;															// storing name of last background process
         strcpy(bg_jobs[num_job].name, token[0]);											// storing job no. of last background process
 		num_job++;
-		printf("[%lld] %d %s\n", num_job, pid, token[0]);
+		printf(DFLT "[%lld] %d %s\n", num_job, pid, token[0]);
     }
 	return;
 }

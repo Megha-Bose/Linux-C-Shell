@@ -6,7 +6,7 @@ void cd(char *path)
     {
         int temp = chdir(HOME);
         if (temp < 0)
-            perror("change directory error");
+            perror(DFLT "change directory error");
         return; 
     }
 
@@ -41,7 +41,7 @@ void cd(char *path)
     int temp = chdir(token);
     if (temp < 0)
     {
-        perror("change directory error");
+        perror(DFLT "change directory error");
         strcpy(emoji,":'(");
     }
     else

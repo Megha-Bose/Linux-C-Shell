@@ -28,7 +28,7 @@ void pinfo(pid_t p_id)
     FILE *op;
     if(!(op = fopen(status, "r")))
     {
-        printf("Process %d does not exist\n", p_id);
+        printf(DFLT "Process %d does not exist\n", p_id);
         strcpy(emoji,":'(");
     }
     else
@@ -43,10 +43,10 @@ void pinfo(pid_t p_id)
         
         char process_path[MX_L2];                                                                               
         char *path; 
-        printf("pid -- %d\nProcess Status -- %smemory (Virtual Memory) -- %sExecutable Path -- ", p_id, token1, token2); 
+        printf(DFLT "pid -- %d\nProcess Status -- %smemory (Virtual Memory) -- %sExecutable Path -- ", p_id, token1, token2); 
         int ret = readlink(exe, process_path, MX_L1);                                                           // getting executable path
         if(ret == -1)
-            printf("no path\n");
+            printf(DFLT "no path\n");
         else 
         {
             process_path[ret] = '\0'; 
@@ -54,10 +54,10 @@ void pinfo(pid_t p_id)
             if(path)
             {
                 path = path + strlen(HOME);
-                printf("~%s\n", path);
+                printf(DFLT "~%s\n", path);
             }
             else 
-                printf("~%s\n", process_path);
+                printf(DFLT "~%s\n", process_path);
         }
         free(status_data);
         free(memory_data);

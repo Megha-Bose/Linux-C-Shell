@@ -13,7 +13,7 @@ void print_jobs()
         fd = fopen(file,"r");
         if(fd < 0)
         {
-            perror("error: No such process\n");
+            perror(DFLT "error: No such process\n");
             strcpy(emoji,":'(");
         }
         else
@@ -29,7 +29,7 @@ void print_jobs()
             
             else strcpy(status, "Running");
         
-            printf("[%lld] %s %s [%lld]\n",i+1, status, name, pid);
+            printf(DFLT "[%lld] %s %s [%lld]\n",i+1, status, name, pid);
             free(temp);
         }
     }

@@ -6,7 +6,7 @@ void prompt()
     char *pseudo_path, *abs_path;
     abs_path = getcwd(CWD, sizeof(CWD));                                                                // gets the current working directory
     if (abs_path == NULL) {
-       perror("current directory error");
+       perror(DFLT "current directory error");
        strcpy(emoji,":'(");
        exit(EXIT_FAILURE);
     }

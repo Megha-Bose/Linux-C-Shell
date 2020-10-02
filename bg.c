@@ -13,7 +13,7 @@ void bg(char *token)
     }
     else
     {
-        printf("error: No such job found\n");
+        printf(DFLT "error: No such job found\n");
         strcpy(emoji,":'(");
     }
 }

@@ -17,7 +17,8 @@ This is an implementation of a Linux shell in C language.
 ## Display
 
 - On executing the code, a shell prompt of the following form appears along with it.
-`<username@system_name:curr_dir>`
+`[exit code] <username@system_name:curr_dir>`
+where `[exit code]` is `:')` if last command exited successfully and `:'(` if the exit was unsuccessful.
 - The directory from which the ​shell is invoked will be the home directory of the shell and is indicated by `~`. 
 - If the user executes `cd` i.e., change dir, then the corresponding change is reflected in the shell as well.
 - If the current working directory is the directory from which your shell is invoked, then on executing command `cd ..`, 
@@ -57,6 +58,7 @@ first word of a simple command, the shell executes the command directly without 
 3. `cd [file]`
     - Implemented in [cd.c](cd.c)
     - Changes directory to the directory specified, throws an error if the directory does not exist.
+    - It supports `cd .`, `cd ..`, `cd -` too.
 
 4. `echo [arguments]`
     

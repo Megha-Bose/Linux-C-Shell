@@ -9,7 +9,7 @@ void set_env(char *token, int cnt)
     token = strtok(NULL, delim);
     if (cnt == 1 || cnt > 3)
     {
-        printf("error: Incorrect number of arguments\n");
+        printf(DFLT "error: Incorrect number of arguments\n");
         strcpy(emoji,":'(");
     }
     else
@@ -21,7 +21,7 @@ void set_env(char *token, int cnt)
             x = setenv(arg1, token, 1);
         if (x < 0)
         {
-            perror("error:\n");
+            perror(DFLT "error:\n");
             strcpy(emoji,":'(");
         }
     }
@@ -33,7 +33,7 @@ void unset_env(char *token, int cnt)
     token = strtok(NULL, delim);
     if (cnt != 2)
     {
-        printf("error: Incorrect number of arguments\n");
+        printf(DFLT "error: Incorrect number of arguments\n");
         strcpy(emoji,":'(");
     }
     else
@@ -41,7 +41,7 @@ void unset_env(char *token, int cnt)
         ll x = unsetenv(token);
         if (x < 0)
         {
-            perror("error:\n");
+            perror(DFLT "error:\n");
             strcpy(emoji,":'(");
         }
     }

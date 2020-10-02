@@ -5,7 +5,7 @@ void echo(char *token) {
     token = strtok(NULL, delim);
     while (token != NULL)
     {
-        printf("%s ",token);              // printing each token
+        printf(DFLT "%s ",token);              // printing each token
         token = strtok(NULL, delim);
     }
     printf("\n");

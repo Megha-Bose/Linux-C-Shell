@@ -12,7 +12,7 @@ void kjob(char *token, int cnt)
     ll f = 0;
     if(cnt != 3)
     {
-        printf("error: Incorrect number of arguments\n");
+        printf(DFLT "error: Incorrect number of arguments\n");
         strcpy(emoji,":'(");
     }
     else
@@ -21,7 +21,7 @@ void kjob(char *token, int cnt)
             kill(bg_jobs[num].pid, sig);
         else
         {
-            printf("error : No such process found\n");
+            printf(DFLT "error : No such process found\n");
             strcpy(emoji,":'(");
         }
     }
