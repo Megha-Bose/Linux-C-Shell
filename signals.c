@@ -4,7 +4,10 @@ void ctrl_c(int sig)
 {
     pid_t p = getpid();
     if(p < 0)
+    {
         perror("Error");
+        strcpy(emoji,":'(");
+    }
     else if (p != SHELL_ID)
         return;
     if (p == SHELL_ID && f_current.pid == -1)
@@ -30,6 +33,7 @@ void stphandler(int sig_num)
         bg_jobs[num_job].pid = f_current.pid;
         strcpy(bg_jobs[num_job].name, f_current.name);
         num_job++;
+        strcpy(emoji,":'(");
         printf("%s with pid %d is suspended.\n", f_current.name, f_current.pid);
         return;
     }

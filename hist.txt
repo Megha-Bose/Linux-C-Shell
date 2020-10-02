@@ -1,20 +1,20 @@
-cd -
+bg 1
+jobs
+fg 1
+jobs
+emacs
+jobs
+bg 1
+jobs
+fg 1
+jobs
+kjob 1 9
+emacs
+jobs
+bg 1
+jobs
+fg 1
+jobs
+kjob 1 9
 cd new
-cd neww
-cd -
-cd neww
-cd -
-cd
-cd ..
-cd -
-cd ..
-cd -
-cd
-cd -
-cd new
-cd -
-cd new
-cd neww
-mkdir newww
-cd newww
 cd -

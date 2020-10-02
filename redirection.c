@@ -32,6 +32,7 @@ void redirection(char *command)
         if(out_file == NULL)
         {
             printf("No output file entered.\n");
+            strcpy(emoji,":'(");
             return;
         }
     }
@@ -45,6 +46,7 @@ void redirection(char *command)
         if(incom[1] == NULL)
         {
             printf("No input file entered.\n");
+            strcpy(emoji,":'(");
             return;
         }
         inp_file = strtok(incom[1], " \n\r\t");
@@ -54,6 +56,7 @@ void redirection(char *command)
         if(!flag)
         {
             printf("File does not exist.\n");
+            strcpy(emoji,":'(");
             return;
         }
     }
@@ -73,6 +76,7 @@ void redirection(char *command)
     if(pid < 0)
     {
         perror("fork error");
+        strcpy(emoji,":'(");
         return;
     }
     if(pid == 0)
@@ -83,6 +87,7 @@ void redirection(char *command)
             if(fd < 0) 
             {
                 perror("Input redirection error");
+                strcpy(emoji,":'(");
                 return;
             }   
             dup2(fd, 0);
@@ -98,6 +103,7 @@ void redirection(char *command)
             if(fd < 0)
             {
                 perror("Output redirection error");
+                strcpy(emoji,":'(");
                 return;
             }
             dup2(fd, 1);         
@@ -106,6 +112,7 @@ void redirection(char *command)
         if (execvp(args[0], args) < 0) 
         {    
             perror("Command not found");
+            strcpy(emoji,":'(");
             exit(EXIT_FAILURE);
         }
         

@@ -16,8 +16,8 @@ void bg_handler(int sig)
 				strcpy(cmd, bg_jobs[i].name);
                 for(int j = i; j < num_job - 1; j++)
      			{
-          			strcpy(bg_jobs[i].name, bg_jobs[i+1].name);
-          			bg_jobs[i].pid = bg_jobs[i+1].pid;
+          			strcpy(bg_jobs[j].name, bg_jobs[j+1].name);
+          			bg_jobs[j].pid = bg_jobs[j+1].pid;
      			}
      			num_job--;
                 chk = 1;      
@@ -25,9 +25,11 @@ void bg_handler(int sig)
             }
         }
 		if(chk && WIFEXITED(status) && WEXITSTATUS(status) == 0)							// process exited normally
-        	fprintf(stderr, "\n%s with PID %d exited normally\n", cmd, pid);
-        else if(chk) 
-			fprintf(stderr, "\n%s with PID %d failed to exit normally\n", cmd, pid);
+        	fprintf(stderr, "\n%s with PID %d exited normally\n:')", cmd, pid);
+        else if(chk)
+        { 
+			fprintf(stderr, "\n%s with PID %d failed to exit normally\n:'(", cmd, pid);
+        }
         if(chk) 
 			prompt();
         fflush(stdout);
@@ -41,7 +43,10 @@ void back(char **token)
     pid_t pid = fork();
 	
     if (pid < 0)
+    {
         perror("fork error");
+        strcpy(emoji,":'(");
+    }
     else if (pid == 0)
     {
 		setpgid(0, 0);
@@ -49,6 +54,7 @@ void back(char **token)
         if (check < 0)
 		{
             perror("exec error");
+            strcpy(emoji,":'(");
 		}
 		exit(0);
     }

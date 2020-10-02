@@ -12,7 +12,10 @@ void print_jobs()
         FILE *fd;
         fd = fopen(file,"r");
         if(fd < 0)
+        {
             perror("error: No such process\n");
+            strcpy(emoji,":'(");
+        }
         else
         {
             fclose(fd);

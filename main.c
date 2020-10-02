@@ -33,6 +33,7 @@ void execute_com(char *commands)
             if(n_com > 2)
             {
                 printf("cd: too many arguments\n");
+                strcpy(emoji,":'(");
                 return;
             }
             com = strtok(NULL, delim);
@@ -65,6 +66,7 @@ void execute_com(char *commands)
         else if (strcmp(com, "exit") == 0 || strcmp(com, "quit") == 0)
         {
             history_write();
+            overkill();
             printf(YELLOW "\n\t   Thank you for using myCShell. See you soon.\n\n" YELLOW_BOLD "\t\t\t  Sayonara!\n\n" DFLT); // exit message
             exit(EXIT_SUCCESS);
         }
@@ -74,6 +76,7 @@ void execute_com(char *commands)
             if(n_com > 2)
             {
                 printf("pinfo error\n");
+                strcpy(emoji,":'(");
                 return;
             }
             if(n_com == 1)
@@ -107,7 +110,8 @@ int main()
     strcpy(CWD1, HOME);
     getlogin_r(USER, sizeof(USER));                                         // get user
     gethostname(HOST, sizeof(HOST));                                        // get host
-    SHELL_ID = getpid();                                                    // get shell pid
+    SHELL_ID = getpid();
+    strcpy(emoji,":')");                                                    // get shell pid
 
     printf(YELLOW_BOLD "\n\t\t:(:    Welcome to myCShell    :):\t\t\n\n" DFLT); // welcome message
     printf(YELLOW "\t\t  It's pretty shelly out here !\n\n" DFLT);
@@ -115,6 +119,7 @@ int main()
     size_t buffer_size = 0, inp_sz = 0;
     char* inp = NULL;                                                       // taking command input
     int num; 
+    ll emoji_flag = 0;
 
     history_init();
 
@@ -124,12 +129,16 @@ int main()
         signal(SIGCHLD, bg_handler);
         signal(SIGTSTP, stphandler);
         signal(SIGINT, ctrl_c);
-
+        
         inp_sz = 0;
         buffer_size = 0;
         num = 0;
 
         f_current.pid = -1;
+        if(emoji_flag)
+            printf("%s",emoji);
+        
+        strcpy(emoji,":')");
         prompt();                                                         // display prompt
         inp_sz = getline(&inp, &buffer_size, stdin);                       // get semi-colon separated commands as input
         if(inp_sz == EOF)
@@ -152,8 +161,9 @@ int main()
         
         for(int i = 0; i < num; i++)                                        // executing the commands one by one
         {
+            emoji_flag = 1;
             execute_com(commands[i]);
-        }
+        } 
         history_write();                                                    // writing current history back to hist.txt  
     }
 }

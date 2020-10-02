@@ -49,6 +49,7 @@ typedef struct job {
 ll num_job, num_bg;
 job bg_jobs[MX_L2];
 job f_current;
+char emoji[4];
 
 int hist_itr, hist_cnt;
 int check_redirect, check_pipe;

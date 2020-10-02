@@ -19,7 +19,10 @@ void l_list(char *dir, char *file)
 
     struct stat file_stat;
     if(stat(path, &file_stat) < 0)
+    {
         perror("File error");
+        strcpy(emoji,":'(");
+    }
     else 
     {
         char perm[20]="";
@@ -61,6 +64,7 @@ void ls(char* dir, int a_flag, int l_flag)
     int num = scandir(dir, &files, NULL, alphasort);
     if(num < 0) {
         perror("Directory error");
+        strcpy(emoji,":'(");
         return;
     }
     for(int i = 0; i < num; i++) {

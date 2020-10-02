@@ -27,7 +27,10 @@ void pinfo(pid_t p_id)
 
     FILE *op;
     if(!(op = fopen(status, "r")))
+    {
         printf("Process %d does not exist\n", p_id);
+        strcpy(emoji,":'(");
+    }
     else
     {
         fclose(op);

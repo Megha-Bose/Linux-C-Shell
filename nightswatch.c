@@ -5,7 +5,10 @@ void night_interrupt()
 {
     FILE *fd = fopen("/proc/interrupts", "r");
     if(fd == NULL)
+    {
         perror("interrupts file error");
+        strcpy(emoji,":'(");
+    }
     else
     {
         char *l = r_line("/proc/interrupts", 2);
@@ -38,7 +41,10 @@ void night_newborn()
 {
     FILE *fd = fopen("/proc/loadavg", "r");
     if(fd == NULL)
+    {
         perror("loadavg file error");
+        strcpy(emoji,":'(");
+    }
     else
     {
         char *l = r_line("/proc/loadavg", 1);

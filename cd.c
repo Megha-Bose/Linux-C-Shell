@@ -42,6 +42,7 @@ void cd(char *path)
     if (temp < 0)
     {
         perror("change directory error");
+        strcpy(emoji,":'(");
     }
     else
     {
