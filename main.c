@@ -136,7 +136,7 @@ int main()
 
         f_current.pid = -1;
         if(emoji_flag)
-            printf("%s",emoji);
+            printf(DFLT "%s",emoji);
         
         strcpy(emoji,":')");
         prompt();                                                         // display prompt
