@@ -28,7 +28,7 @@ void stphandler(int sig_num)
         return;
     if (f_current.pid != -1)
     {
-        kill(SIGTTIN, f_current.pid);
+        kill(f_current.pid, SIGTTIN);
         signal(SIGTSTP, stphandler);
         bg_jobs[num_job].pid = f_current.pid;
         strcpy(bg_jobs[num_job].name, f_current.name);
